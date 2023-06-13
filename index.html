@@ -6,19 +6,17 @@
   <script src="script.js"></script>
 </head>
 
-<body onload="addItem()">
+<body onload="display()">
 
   <div class="input">
     <form>
-      <input id="Currentdate" type="date" required>
-      <input id="Amount" type="number" placeholder="Amount" required>
-      <input id="Name" type="text" placeholder="Expense-Name" required>
+      <input id="currentDate" type="date" required>
+      <input id="amount" type="number" placeholder="Amount spent" required>
+      <input id="expenseType" type="text" placeholder="Expense type" required>
       
-      <input type="hidden" id="editExpenseId" value="">
+      <input type="hidden" id="expenseId" value="">
 
-
-      <input type="submit" id="btn" onclick="addItem()" value="AddItem">
-
+      <input type="submit" id="btn" class="btn" onclick="addItem()" value="Add item">
       <button type="button" class="btn" onclick="saveItem()">Save</button>
     </form>
   </div>
@@ -28,9 +26,9 @@
       <table>
         <thead>
           <tr>
-            <th>DATE</th>
-            <th>AMOUNT</th>
-            <th>EXPENSE TYPE</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Expense type</th>
           </tr>
         </thead>
         <tbody id="data">
@@ -42,8 +40,8 @@
       <table>
         <thead>
           <tr>
-            <th>MONTH</th>
-            <th>AMOUNT</th>
+            <th>Month</th>
+            <th>Amount</th>
           </tr>
         </thead>
         <tbody id="monthlyTotal">

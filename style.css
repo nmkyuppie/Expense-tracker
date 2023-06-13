@@ -27,7 +27,7 @@ tr {
 
 /*input field*/
 
-#Currentdate{
+#currentDate{
   color: #8707ff;
   border: 2px solid #8707ff;
   border-radius: 10px;
@@ -35,11 +35,11 @@ tr {
   background: transparent;
   max-width: 190px;
 }
-#Currentdate:active {
+#currentDate:active {
   box-shadow: 2px 2px 15px #8707ff inset;
  }
 
- #Name{
+ #expenseType{
   color: #8707ff;
   border: 2px solid #8707ff;
   border-radius: 10px;
@@ -47,10 +47,10 @@ tr {
   background: transparent;
   max-width: 190px;
 }
-#Name:active {
+#expenseType:active {
   box-shadow: 2px 2px 15px #8707ff inset;
  }
- #Amount{
+ #amount{
   color: #8707ff;
   border: 2px solid #8707ff;
   border-radius: 10px;
@@ -58,7 +58,7 @@ tr {
   background: transparent;
   max-width: 190px;
 }
-#Amount.container {
+#amount.container {
   box-shadow: 2px 2px 15px #8707ff inset;
  }
 
@@ -124,7 +124,6 @@ tr {
 
 button {
   padding: 10px 20px;
-  text-transform: uppercase;
   border-radius: 8px;
   font-size: 17px;
   font-weight: 500;
