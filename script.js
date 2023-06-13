@@ -1,191 +1,132 @@
-let expenseItems = [];
 function addItem() {
+  const date = document.getElementById("currentDate");
+  const amount = document.getElementById("amount");
+  const name = document.getElementById("expenseType");
 
+  let smallLetters = [..."abcdefghijklmnopqrstuvwxyz"];
+  let capitalLetters = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+  let numbers = [..."0123456789"];
 
-  let id = "";
+  let array = [...smallLetters, ...capitalLetters, ...numbers];
 
-  const date = document.getElementById("Currentdate");
-  const amount = document.getElementById("Amount");
-  const name = document.getElementById("Name");
-
-
-
-  let smallletter = [...'abcdefghijklmnopqrstuvwxyz'];
-  let capitalLetters = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
-  let numbers = [...'0123456789'];
-
-  let Array = [...smallletter, ...capitalLetters, ...numbers];
+  let uniqueId = "";
 
   for (i = 0; i < 10; i++) {
-
-    let output = Math.floor(Math.random() * Array.length);
-    let arr = Array[output]
-    id += arr
+    let output = Math.floor(Math.random() * array.length);
+    let character = array[output];
+    uniqueId += character;
   }
 
+  let item = { date: date.value, amount: amount.value, name: name.value, id: uniqueId };
 
-  let item = { date: date.value, amount: amount.value, name: name.value, id: id };
+  pushItem(item);
 
-  expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
-  expenseItems.push(item);
-  localStorage.setItem('expense', JSON.stringify(expenseItems));
+  display();
 
-  display(expenseItems);
-
-  totalAmount();
-
-
-  date.value = '';
-  amount.value = '';
-  name.value = '';
+  date.value = "";
+  amount.value = "";
+  name.value = "";
 }
 
+const pushItem = (item) => {
+  let expenseItems = JSON.parse(localStorage.getItem("expense")) ?? [];
+  expenseItems.push(item);
+  localStorage.setItem("expense", JSON.stringify(expenseItems));
+};
 
-
-
-function display(expenseItems) {
-
-
-  let html = '';
+function display() {
+  document.getElementById('currentDate').valueAsDate = new Date();
+  let expenseItems = JSON.parse(localStorage.getItem("expense")) ?? [];
+  let html = "";
   for (let i = 0; i < expenseItems.length; i++) {
     html += `<tr><td>${expenseItems[i].date}</td><td>${expenseItems[i].amount}</td><td>${expenseItems[i].name}</td>
-      <td><button onclick="deleteExpense('${expenseItems[i].id}')">Delete</button></td><td><button onclick="EditExpense('${expenseItems[i].id}')">Edit</button></td></tr>`;
+      <td><button onclick="deleteExpense('${expenseItems[i].id}')">Delete</button></td><td><button onclick="editExpense('${expenseItems[i].id}')">Edit</button></td></tr>`;
   }
 
-  document.getElementById('data').innerHTML = html;
+  document.getElementById("data").innerHTML = html;
 
+  totalAmount();
 }
 
-
-
 const totalAmount = () => {
-  const month = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-
-  const expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
-  const myMap = new Map();
+  const expenseItems = JSON.parse(localStorage.getItem("expense")) ?? [];
+  const monthMap = new Map();
 
   for (let i = 0; i < expenseItems.length; i++) {
     const item = expenseItems[i];
-    const d = new Date(item.date);
-    const monname = month[d.getMonth()];
-    const value = parseInt(item.amount);
+    const date = new Date(item.date);
+    const month = months[date.getMonth()];
+    const amount = parseInt(item.amount);
 
-    if (myMap.has(monname)) {
-      const currentamount = parseInt(myMap.get(monname)) + value;
-
-      myMap.set(monname, currentamount);
+    if (monthMap.has(month)) {
+      const currentAmount = parseInt(monthMap.get(month)) + amount;
+      monthMap.set(month, currentAmount);
     } else {
-      myMap.set(monname, value);
+      monthMap.set(month, amount);
     }
 
-    let html = '';
+    let html = "";
 
-    for (let i = 0; i < month.length; i++) {
-
-      const monthName = month[i];
-
-      const amount = myMap.get(monthName);
-
-      if (amount !== undefined)
-
+    for (let i = 0; i < months.length; i++) {
+      const monthName = months[i];
+      const amount = monthMap.get(monthName);
+      if (amount !== undefined) {
         html += `<tr><td>${monthName}</td><td>${amount}</td></tr>`;
+      }
     }
 
-    document.getElementById('monthlyTotal').innerHTML = html;
-
+    document.getElementById("monthlyTotal").innerHTML = html;
   }
-
-}
-
+};
 
 function deleteExpense(id) {
-  let expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
-
-  const filter = expenseItems.filter(item => item.id !== id);
-  expenseItems = filter;
-  localStorage.setItem('expense', JSON.stringify(expenseItems));
-  display(expenseItems);
-  totalAmount();
+  let expenseItems = JSON.parse(localStorage.getItem("expense")) ?? [];
+  expenseItems = expenseItems.filter((item) => item.id !== id);
+  localStorage.setItem("expense", JSON.stringify(expenseItems));
+  display();
 }
 
+function editExpense(id) {
+  let expenseItems = JSON.parse(localStorage.getItem("expense")) ?? [];
+  const item = expenseItems.find((i) => i.id === id);
 
+  if (item) {
+    const date = document.getElementById("currentDate");
+    const amount = document.getElementById("amount");
+    const name = document.getElementById("expenseType");
 
+    date.value = item.date;
+    amount.value = item.amount;
+    name.value = item.name;
 
-function EditExpense(id) {
-
-  console.log('ID:', id);
-  let expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
-
-
-  const foundItem = expenseItems.find(item => item.id === id);
-
-  console.log(foundItem)
-
-  if (foundItem) {
-
-    const date = document.getElementById("Currentdate");
-    const amount = document.getElementById("Amount");
-    const name = document.getElementById("Name");
-
-    date.value = foundItem.date;
-
-
-    amount.value = foundItem.amount;
-
-    name.value = foundItem.name;
-
-    document.getElementById("editExpenseId").value = id;
-
-    localStorage.setItem('expense', JSON.stringify(expenseItems));
-
-
-
-    display(expenseItems);
-    totalAmount();
+    document.getElementById("expenseId").value = id;
   }
-
 }
 
 function saveItem() {
-  const id = document.getElementById("editExpenseId").value;
-  const date = document.getElementById("Currentdate").value;
-  const amount = document.getElementById("Amount").value;
-  const name = document.getElementById("Name").value;
+  const id = document.getElementById("expenseId").value;
+  const date = document.getElementById("currentDate").value;
+  const amount = document.getElementById("amount").value;
+  const name = document.getElementById("expenseType").value;
 
-  let expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
+  let expenseItems = JSON.parse(localStorage.getItem("expense")) ?? [];
 
-  const foundItem = expenseItems.find(item => item.id === id);
+  const item = expenseItems.find((item) => item.id === id);
 
-  if (foundItem) {
-    foundItem.date = date;
-    foundItem.amount = amount;
-    foundItem.name = name;
+  if (item) {
+    item.date = date;
+    item.amount = amount;
+    item.name = name;
 
-    localStorage.setItem('expense', JSON.stringify(expenseItems));
+    localStorage.setItem("expense", JSON.stringify(expenseItems));
 
-    display(expenseItems);
-    totalAmount();
+    display();
   }
 
-  document.getElementById("Currentdate").value = '';
-  document.getElementById("Amount").value = '';
-  document.getElementById("Name").value = '';
-  document.getElementById("editExpenseId").value = '';
-
+  document.getElementById("currentDate").value = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("expenseType").value = "";
+  document.getElementById("expenseId").value = "";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
