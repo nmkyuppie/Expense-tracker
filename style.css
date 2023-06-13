@@ -1,7 +1,5 @@
 
-body{
-  background-color: #FBC02D;
-}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse; 
@@ -30,22 +28,8 @@ table {
   height: 60px; 
 }
 
-#btn{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 60px;
-  border: 2px solid white;
-    background-color: #B71C1C;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  #btn:hover {
-    background-color:#1A237E;
-  }
 
-  #edit{
+  #button{
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 60px;
@@ -56,11 +40,8 @@ table {
       transition: background-color 0.3s ease;
     }
     
-    #edit:hover {
+    #button:hover {
       background-color:#1A237E;
     }
   
-
-
-
 
