@@ -115,7 +115,7 @@ function deleteExpense(id) {
 
 function EditExpense(id) {
 
-
+  console.log('ID:', id);
   let expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
 
 
@@ -129,8 +129,6 @@ function EditExpense(id) {
     const amount = document.getElementById("Amount");
     const name = document.getElementById("Name");
 
-
-
     date.value = foundItem.date;
 
 
@@ -138,7 +136,7 @@ function EditExpense(id) {
 
     name.value = foundItem.name;
 
-
+    document.getElementById("editExpenseId").value = id;
 
     localStorage.setItem('expense', JSON.stringify(expenseItems));
 
@@ -151,16 +149,30 @@ function EditExpense(id) {
 }
 
 function saveItem() {
-  console.log("vasanth")
-
-
-
-
   const id = document.getElementById("editExpenseId").value;
   const date = document.getElementById("Currentdate").value;
   const amount = document.getElementById("Amount").value;
   const name = document.getElementById("Name").value;
 
+  let expenseItems = JSON.parse(localStorage.getItem('expense')) ?? [];
+
+  const foundItem = expenseItems.find(item => item.id === id);
+
+  if (foundItem) {
+    foundItem.date = date;
+    foundItem.amount = amount;
+    foundItem.name = name;
+
+    localStorage.setItem('expense', JSON.stringify(expenseItems));
+
+    display(expenseItems);
+    totalAmount();
+  }
+
+  document.getElementById("Currentdate").value = '';
+  document.getElementById("Amount").value = '';
+  document.getElementById("Name").value = '';
+  document.getElementById("editExpenseId").value = '';
 
 }
 

@@ -2,6 +2,7 @@
 
 <head>
   <link rel="stylesheet" href="style.css">
+  
   <script src="script.js"></script>
 </head>
 
@@ -10,14 +11,15 @@
   <div class="input">
     <form>
       <input id="Currentdate" type="date" required>
-      <input id="Amount" type="number" required>
-      <input id="Name" type="text" required>
+      <input id="Amount" type="number" placeholder="Amount" required>
+      <input id="Name" type="text" placeholder="Expense-Name" required>
       
       <input type="hidden" id="editExpenseId" value="">
 
+
       <input type="submit" id="btn" onclick="addItem()" value="AddItem">
 
-      <button type="button" onclick="saveitem()">Save</button>
+      <button type="button" class="btn" onclick="saveItem()">Save</button>
     </form>
   </div>
 
