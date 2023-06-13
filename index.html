@@ -1,0 +1,51 @@
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body onload="addItem()">
+
+  <div class="input">
+    <form>
+      <input id="Currentdate" type="date" required>
+      <input id="Amount" type="number" required>
+      <input id="Name" type="text" required>
+      <input type="hidden" id="editExpenseId" value="">
+
+      <input type="submit" id="btn" onclick="addItem()" value="AddItem">
+      
+    <button onclick="saveitem()">Save</button>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="tab-1">
+      <table>
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>AMOUNT</th>
+            <th>EXPENSE TYPE</th>
+          </tr>
+        </thead>
+        <tbody id="data">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-2">
+      <table>
+        <thead>
+          <tr>
+            <th>MONTH</th>
+            <th>AMOUNT</th>
+          </tr>
+        </thead>
+        <tbody id="monthlyTotal">
+        </tbody>
+      </table>
+    </div>
+  </div>
+ 
+</body>
+</html>
