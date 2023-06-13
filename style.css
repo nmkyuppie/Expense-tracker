@@ -59,3 +59,20 @@ tr {
 #edit:hover {
   background-color: #1A237E;
 }
+
+  #button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    border: 2px solid white;
+      background-color: #B71C1C;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    #button:hover {
+      background-color:#1A237E;
+    }
+  
+

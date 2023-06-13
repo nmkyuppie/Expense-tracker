@@ -150,17 +150,20 @@ function EditExpense(id) {
 
 }
 
-function saveitem() {
+function saveItem() {
+  console.log("vasanth")
+
+
+
+
   const id = document.getElementById("editExpenseId").value;
   const date = document.getElementById("Currentdate").value;
   const amount = document.getElementById("Amount").value;
   const name = document.getElementById("Name").value;
 
-  console.log(name)
-  console.log(amount)
-  console.log(id)
 
 }
+
 
 
 
