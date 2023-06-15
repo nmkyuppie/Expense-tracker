@@ -5,6 +5,7 @@ body{
 table {
   font-family: arial, Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  box-sizing: content-box;
 
 }
 
@@ -148,5 +149,4 @@ button:hover,:focus {
               0 0 50px #008cff,
               0 0 100px #008cff;
 }
-
 

@@ -40,7 +40,7 @@ function display() {
   let html = "";
   for (let i = 0; i < expenseItems.length; i++) {
     html += `<tr><td>${expenseItems[i].date}</td><td>${expenseItems[i].amount}</td><td>${expenseItems[i].name}</td>
-      <td><button onclick="deleteExpense('${expenseItems[i].id}')">Delete</button></td><td><button onclick="editExpense('${expenseItems[i].id}')">Edit</button></td></tr>`;
+      <td><button class="btn btn-outline-primary"onclick="deleteExpense('${expenseItems[i].id}')">Delete</button></td><td><button class="btn btn-outline-primary" onclick="editExpense('${expenseItems[i].id}')">Edit</button></td></tr>`;
   }
 
   document.getElementById("data").innerHTML = html;
